@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Boat</title>
+</head>
+<body style="margin:0; display:flex; justify-content:center; align-items:center; height:100vh; background:#ffffff;">
+
+<canvas id="canvas" width="600" height="600"
+  style="border: 2px solid #eaf2db; border-radius: 10px; background:#eaf2db; box-shadow:0 2px 15px rgba(0,0,0,0.3);">
+</canvas>
+
+<script>
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+
+
+// FUNGSI GAMBAR POLYGON
+function drawPolygon(points, color) {
+  ctx.beginPath();
+  ctx.moveTo(points[0][0], points[0][1]);
+  for (let i = 1; i < points.length; i++) {
+    ctx.lineTo(points[i][0], points[i][1]);
+  }
+  ctx.closePath();
+  ctx.fillStyle = color;
+  ctx.fill();
+}
+
+
+// TRANSFORMASI GLOBAL
+
+// Pindahkan origin ke tengah canvas
+ctx.translate(350, 300);
+
+// AIR
+ctx.save();
+
+ctx.shadowColor = "rgba(0,0,0,0.15)";
+ctx.shadowBlur = 20;
+ctx.shadowOffsetX = 0;
+ctx.shadowOffsetY = 5;
+
+// Translasi air
+ctx.translate(-100, 20);
+
+// Sedikit scaling biar efek perspektif
+ctx.scale(1.1, 1);
+
+drawPolygon([[-45,40],[-35,58],[-100,45]], "#a4fff7");
+drawPolygon([[-35,58],[0,80],[-70,75]], "#67ecf0");
+drawPolygon([[-35,58],[0,80],[50,68]], "#60c8f4");
+drawPolygon([[0,80],[50,68],[53,97]], "#7be6ff");
+drawPolygon([[53,97],[128,78],[50,68]], "#62c8f0");
+drawPolygon([[128,78],[140,60],[190,75]], "#a4fff7");
+drawPolygon([[128,78],[158,95],[190,75]], "#67ecf0");
+drawPolygon([[40,125],[120,135],[70,110]], "#a7f5ff");
+
+ctx.restore();
+
+// PERAHU
+ctx.save();
+
+ctx.shadowColor = "rgba(0,0,0,0.2)";
+ctx.shadowBlur = 12;
+ctx.shadowOffsetX = 4;
+ctx.shadowOffsetY = 8;
+
+// Translasi & rotasi
+ctx.translate(-100, 68);
+ctx.rotate(-0.01);
+ctx.scale(1.1, 1.1);
+
+// ===== ATAS =====
+drawPolygon([[100,-66],[200,-80],[84,-95]], "#bc592f");
+drawPolygon([[18,-103],[-100,-110],[-3,-75]], "#db7835");
+
+drawPolygon([[53,-150],[50,-60],[-3,-75]], "#f6ea83");
+drawPolygon([[53,-150],[100,-66],[50,-60]], "#ffb964");
+
+// ===== BADAN =====
+drawPolygon([[-100,-110],[50,-60],[-35,8]], "#fab768");
+drawPolygon([[50,-60],[200,-80],[128,28]], "#ea8a49");
+drawPolygon([[128,28],[50,18],[50,-60]], "#d8733c");
+drawPolygon([[-35,8],[50,18],[50,-60]], "#e99652");
+
+ctx.restore();
+
+</script>
+
+</body>
+</html>
